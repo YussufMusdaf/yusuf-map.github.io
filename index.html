@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kenya Major Cities Map</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        #map {
+            height: 600px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="my-4 text-center">Major Cities in Kenya</h1>
+        <div id="map"></div>
+    </div>
+
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+   
+        var map = L.map('map').setView([-1.2921, 36.8219], 6);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+        }).addTo(map);
+
+                var cities = [
+            { name: "Nairobi", coords: [-1.2921, 36.8219], info: "Capital city of Kenya." },
+            { name: "Mombasa", coords: [-4.0435, 39.6682], info: "Coastal city known for its beaches." },
+            { name: "Kisumu", coords: [-0.0917, 34.7680], info: "City on Lake Victoria mostly important for fishing." },
+            { name: "Nakuru", coords: [-0.3031, 36.0800], info: "Known for Lake Nakuru." },
+            { name: "Eldoret", coords: [0.5143, 35.2698], info: "mostly known for athletics." },
+            { name: "Thika", coords: [-1.0333, 37.0693], info: "Industrial town with many factories." },
+            { name: "Malindi", coords: [-3.2184, 40.1169], info: "Tourist town with beautiful beaches." },
+            { name: "Kitale", coords: [1.0157, 35.0068], info: "Known for farming." },
+            { name: "Garissa", coords: [-0.4561, 39.6583], info: "Major city in Northeastern Kenya." },
+            { name: "Nyeri", coords: [-0.4172, 36.9515], info: "is surrounded with national parks." }
+        ];
+
+  
+        cities.forEach(function(city) {
+            var popupContent = `
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">${city.name}</h5>
+                        <p class="card-text">${city.info}</p>
+                    </div>
+                </div>
+            `;
+            L.marker(city.coords).addTo(map)
+                .bindPopup(popupContent);
+        });
+    </script>
+</body>
+</html>
